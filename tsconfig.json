@@ -17,6 +17,6 @@
     },
     "files": [
         "./src/result.ts",
-        "./src/wrap.ts"
+        "./src/example.ts"
     ]
 }
