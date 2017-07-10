@@ -40,20 +40,14 @@ export class Result {
     }
 }
 
-const writeable = {
-    toEntity: (content: string): HttpEntity => new HttpEntity(content, 'text/plain'),
-};
-
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L389
-class Status extends Result {
+export class Status extends Result {
     constructor(status: number) {
         super(new ResponseHeader(status), HttpEntity.NoEntity);
     }
 
-    // This method should receive a Writeable type that provides a `toEntity` method. At the moment
-    // it's hardcoded, and it can only receive a string.
-    apply<Content extends string>(content: Content): Result {
-        return new Result(this.header, writeable.toEntity(content));
+    apply(httpEntity: HttpEntity): Result {
+        return new Result(this.header, httpEntity);
     }
 }
 
@@ -62,17 +56,13 @@ const HeaderNames = {
 };
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L664
-const Redirect = (url: string, statusCode: number) =>
+export const Redirect = (url: string, statusCode: number) =>
     new Status(statusCode).withHeaders(new Map([[HeaderNames.Location, url]]));
 
-const TemporaryRedirect = (url: string): Result =>
+export const TemporaryRedirect = (url: string): Result =>
     Redirect(url, HttpStatusCodes.TEMPORARY_REDIRECT);
 
-const Ok = new Status(HttpStatusCodes.OK);
-const InternalServerError = new Status(HttpStatusCodes.INTERNAL_SERVER_ERROR);
-
-// Examples
-
-Ok.apply('foo').withSession({ foo: 'bar' });
-InternalServerError.apply('error!').withSession({ foo: 'bar' });
-TemporaryRedirect('/foo');
+export const Ok = new Status(HttpStatusCodes.OK);
+export const InternalServerError = new Status(
+    HttpStatusCodes.INTERNAL_SERVER_ERROR,
+);
