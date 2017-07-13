@@ -1,9 +1,9 @@
 // TODO: Session
 
 import * as express from 'express';
-import { Result } from './result';
 
 import * as MapHelpers from './helpers/map';
+import { Result } from './result';
 
 export const wrap = (fn: () => Result): express.RequestHandler => (
     _req,
