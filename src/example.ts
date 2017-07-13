@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as session from 'express-session';
 import * as http from 'http';
 
+import { getRequestSession } from './helpers/express';
 import {
     HttpEntity,
     InternalServerError,
@@ -23,9 +24,19 @@ const errorRequestHandler = wrap(() =>
 
 const redirectRequestHandler = wrap(() => TemporaryRedirect('/success'));
 
+const sessionRequestHandler = wrap(req =>
+    Ok.apply(
+        new HttpEntity(
+            JSON.stringify({ session: getRequestSession(req).data }),
+            'application/json',
+        ),
+    ).withSession(new Map([['userId', 'foo']])),
+);
+
 app.get('/success', successRequestHandler);
 app.get('/error', errorRequestHandler);
 app.get('/redirect', redirectRequestHandler);
+app.get('/session', sessionRequestHandler);
 
 const onListen = (server: http.Server) => {
     const { port } = server.address();
