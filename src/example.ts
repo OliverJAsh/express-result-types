@@ -15,11 +15,13 @@ const app = express();
 app.use(session({ secret: 'foo' }));
 
 const successRequestHandler = wrap(() =>
-    Ok.apply(new HttpEntity('"success"', 'application/json')),
+    Ok.apply(new HttpEntity(JSON.stringify('success'), 'application/json')),
 );
 
 const errorRequestHandler = wrap(() =>
-    InternalServerError.apply(new HttpEntity('"error"', 'application/json')),
+    InternalServerError.apply(
+        new HttpEntity(JSON.stringify('error'), 'application/json'),
+    ),
 );
 
 const redirectRequestHandler = wrap(() => TemporaryRedirect('/success'));
