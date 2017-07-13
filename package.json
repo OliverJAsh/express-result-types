@@ -4,7 +4,7 @@
   "scripts": {
     "lint": "tslint --project tsconfig.json --type-check",
     "compile": "tsc",
-    "start": "yarn compile && yarn lint && node ./target/example.js",
+    "start": "npm run compile && npm run lint && node ./target/example.js",
     "format": "prettier --write --tab-width 4 --print-width 100 --single-quote --trailing-comma all '!(target)/**/*.{ts,js}'"
   },
   "dependencies": {

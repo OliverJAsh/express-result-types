@@ -11,8 +11,17 @@ export class ResponseHeader {
     ) {}
 }
 
-// https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Session.scala
-export class Session {}
+// - Play:
+//   - use `Map<string, string>`, where `.get` returns `Option`
+//   - data is not stored by server (manual DB lookup)
+// https://www.playframework.com/documentation/2.6.x/ScalaSessionFlash#Reading-a-Session-value
+// - Express:
+//   - use any JS value that can be serialized to JSON
+//   - data is stored by server
+// https://github.com/expressjs/session#reqsession
+
+// https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Session.scala#L19
+type Session = Map<string, string>;
 
 // https://github.com/playframework/playframework/blob/c72667b3fe22b07433d8aeefdb2c9489a3709cd8/framework/src/play/src/main/scala/play/api/http/HttpEntity.scala
 export class HttpEntity {
