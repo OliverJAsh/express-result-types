@@ -2,7 +2,6 @@
 
 import * as express from 'express';
 
-import { getRequestSession } from './helpers/express';
 import * as MapHelpers from './helpers/map';
 import { Result } from './result';
 
@@ -17,9 +16,8 @@ export const wrap = (
         result.newSession !== undefined
             ? MapHelpers.toStringDictionary(result.newSession)
             : {};
-    const requestSession = getRequestSession(req);
 
-    requestSession.data = sessionStringDictionary;
+    req.session.data = sessionStringDictionary;
     res
         .status(result.header.status)
         .set(headersStringDictionary)
