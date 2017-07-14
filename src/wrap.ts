@@ -1,5 +1,3 @@
-// TODO: Session
-
 import * as express from 'express';
 
 import * as MapHelpers from './helpers/map';
