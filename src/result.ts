@@ -72,6 +72,4 @@ export const TemporaryRedirect = (url: string): Result =>
     Redirect(url, HttpStatusCodes.TEMPORARY_REDIRECT);
 
 export const Ok = new Status(HttpStatusCodes.OK);
-export const InternalServerError = new Status(
-    HttpStatusCodes.INTERNAL_SERVER_ERROR,
-);
+export const InternalServerError = new Status(HttpStatusCodes.INTERNAL_SERVER_ERROR);

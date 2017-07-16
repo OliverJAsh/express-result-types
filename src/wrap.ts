@@ -3,17 +3,14 @@ import * as express from 'express';
 import * as MapHelpers from './helpers/map';
 import { Result } from './result';
 
-export const wrap = (
-    fn: (req: express.Request) => Result,
-): express.RequestHandler => (req, res) => {
+export const wrap = (fn: (req: express.Request) => Result): express.RequestHandler => (
+    req,
+    res,
+) => {
     const result = fn(req);
-    const headersStringDictionary = MapHelpers.toStringDictionary(
-        result.header.headers,
-    );
+    const headersStringDictionary = MapHelpers.toStringDictionary(result.header.headers);
     const sessionStringDictionary =
-        result.newSession !== undefined
-            ? MapHelpers.toStringDictionary(result.newSession)
-            : {};
+        result.newSession !== undefined ? MapHelpers.toStringDictionary(result.newSession) : {};
 
     req.session.data = sessionStringDictionary;
     res

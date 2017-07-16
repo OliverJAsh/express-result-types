@@ -14,9 +14,7 @@ export const reduceMap = <Key, Value, Acc>(
 
 type StringDictionary<Value> = { [key: string]: Value };
 
-export const toStringDictionary = <Value>(
-    map: Map<string, Value>,
-): StringDictionary<Value> =>
+export const toStringDictionary = <Value>(map: Map<string, Value>): StringDictionary<Value> =>
     reduceMap<string, Value, StringDictionary<Value>>((acc, value, key) => {
         acc[key] = value;
         return acc;

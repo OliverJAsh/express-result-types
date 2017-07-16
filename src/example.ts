@@ -2,12 +2,7 @@ import * as express from 'express';
 import * as session from 'express-session';
 import * as http from 'http';
 
-import {
-    HttpEntity,
-    InternalServerError,
-    Ok,
-    TemporaryRedirect,
-} from './result';
+import { HttpEntity, InternalServerError, Ok, TemporaryRedirect } from './result';
 import { wrap } from './wrap';
 
 const app = express();
@@ -18,19 +13,14 @@ const successRequestHandler = wrap(() =>
 );
 
 const errorRequestHandler = wrap(() =>
-    InternalServerError.apply(
-        new HttpEntity(JSON.stringify('error'), 'application/json'),
-    ),
+    InternalServerError.apply(new HttpEntity(JSON.stringify('error'), 'application/json')),
 );
 
 const redirectRequestHandler = wrap(() => TemporaryRedirect('/success'));
 
 const sessionRequestHandler = wrap(req =>
     Ok.apply(
-        new HttpEntity(
-            JSON.stringify({ session: req.session.data }),
-            'application/json',
-        ),
+        new HttpEntity(JSON.stringify({ session: req.session.data }), 'application/json'),
     ).withSession(new Map([['userId', 'foo']])),
 );
 
