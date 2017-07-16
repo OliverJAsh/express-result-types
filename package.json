@@ -1,12 +1,19 @@
 {
   "name": "express-result-types",
-  "private": true,
+  "main": "./target/index.js",
+  "typings": "./target/index.d.ts",
+  "version": "0.0.0",
   "scripts": {
     "lint": "tslint --project tsconfig.json --type-check",
     "compile": "tsc",
     "start": "npm run compile && npm run lint && node ./target/example.js",
+    "cleanTarget": "rm -rf ./target/*",
+    "prepublishOnly": "npm run cleanTarget && npm run compile && npm run lint",
     "format": "prettier --write --tab-width 4 --print-width 100 --single-quote --trailing-comma all '!(target)/**/*.{ts,js}'"
   },
+  "files": [
+    "target"
+  ],
   "dependencies": {
     "express": "4.15.3",
     "express-session": "1.15.3",

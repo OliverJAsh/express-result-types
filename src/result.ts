@@ -21,7 +21,7 @@ export class ResponseHeader {
 // https://github.com/expressjs/session#reqsession
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Session.scala#L19
-type Session = Map<string, string>;
+export type Session = Map<string, string>;
 
 // https://github.com/playframework/playframework/blob/c72667b3fe22b07433d8aeefdb2c9489a3709cd8/framework/src/play/src/main/scala/play/api/http/HttpEntity.scala
 export class HttpEntity {

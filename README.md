@@ -2,6 +2,14 @@
 
 Construct responses declaratively with the `Result` type, inspired by [Play Framework].
 
+[See the example](./src/example.ts).
+
+## Installation
+
+```
+yarn add express-result-types
+```
+
 ## Development
 
 ```
