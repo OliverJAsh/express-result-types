@@ -2,30 +2,28 @@ import * as express from 'express';
 import * as session from 'express-session';
 import * as http from 'http';
 
-import { HttpEntity, InternalServerError, Ok, TemporaryRedirect } from './result';
+import { InternalServerError, JsValue, jsValueWriteable, Ok, TemporaryRedirect } from './result';
 import { wrap, wrapAsync } from './wrap';
 
 const app = express();
 app.use(session({ secret: 'foo' }));
 
-const successRequestHandler = wrap(() =>
-    Ok.apply(new HttpEntity(JSON.stringify('success'), 'application/json')),
-);
+const successRequestHandler = wrap(() => Ok.apply(new JsValue('success'), jsValueWriteable));
 
 const successRequestHandlerAsync = wrapAsync(() =>
-    Promise.resolve(Ok.apply(new HttpEntity(JSON.stringify('success'), 'application/json'))),
+    Promise.resolve(Ok.apply(new JsValue('success'), jsValueWriteable)),
 );
 
 const errorRequestHandler = wrap(() =>
-    InternalServerError.apply(new HttpEntity(JSON.stringify('error'), 'application/json')),
+    InternalServerError.apply(new JsValue('error'), jsValueWriteable),
 );
 
 const redirectRequestHandler = wrap(() => TemporaryRedirect('/success'));
 
 const sessionRequestHandler = wrap(req =>
-    Ok.apply(
-        new HttpEntity(JSON.stringify({ session: req.session.data }), 'application/json'),
-    ).withSession(new Map([['userId', 'foo']])),
+    Ok.apply(new JsValue({ session: req.session.data }), jsValueWriteable).withSession(
+        new Map([['userId', 'foo']]),
+    ),
 );
 
 app.get('/success', successRequestHandler);
