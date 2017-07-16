@@ -13,10 +13,15 @@ export const applyResultToExpress = ({
     result: Result;
 }): void => {
     const headersStringDictionary = MapHelpers.toStringDictionary(result.header.headers);
-    const sessionStringDictionary =
-        result.newSession !== undefined ? MapHelpers.toStringDictionary(result.newSession) : {};
+    const maybeSessionStringDictionary =
+        result.newSession !== undefined
+            ? MapHelpers.toStringDictionary(result.newSession)
+            : undefined;
 
-    req.session.data = sessionStringDictionary;
+    if (maybeSessionStringDictionary !== undefined) {
+        const sessionStringDictionary = maybeSessionStringDictionary;
+        req.session.data = sessionStringDictionary;
+    }
     res
         .status(result.header.status)
         .set(headersStringDictionary)
