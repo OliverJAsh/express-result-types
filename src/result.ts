@@ -4,11 +4,7 @@ import { concatMap } from './helpers/map';
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L32
 export class ResponseHeader {
-    constructor(
-        // statusCode: 200 | 302 | 500, http-status-codes
-        public status: number,
-        public headers: Map<string, string> = new Map(),
-    ) {}
+    constructor(public status: number, public headers: Map<string, string> = new Map()) {}
 }
 
 // - Play:
