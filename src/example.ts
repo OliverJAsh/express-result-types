@@ -12,6 +12,10 @@ const successRequestHandler = wrap(() =>
     Ok.apply(new HttpEntity(JSON.stringify('success'), 'application/json')),
 );
 
+const successRequestHandlerAsync = wrapAsync(() =>
+    Promise.resolve(Ok.apply(new HttpEntity(JSON.stringify('success'), 'application/json'))),
+);
+
 const errorRequestHandler = wrap(() =>
     InternalServerError.apply(new HttpEntity(JSON.stringify('error'), 'application/json')),
 );
@@ -25,6 +29,7 @@ const sessionRequestHandler = wrap(req =>
 );
 
 app.get('/success', successRequestHandler);
+app.get('/successAsync', successRequestHandlerAsync);
 app.get('/error', errorRequestHandler);
 app.get('/redirect', redirectRequestHandler);
 app.get('/session', sessionRequestHandler);
