@@ -3,7 +3,7 @@ import * as express from 'express';
 import * as MapHelpers from './helpers/map';
 import { Result } from './result';
 
-const applyResultToExpress = ({
+export const applyResultToExpress = ({
     req,
     res,
     result,
