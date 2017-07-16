@@ -3,7 +3,7 @@ import * as session from 'express-session';
 import * as http from 'http';
 
 import { HttpEntity, InternalServerError, Ok, TemporaryRedirect } from './result';
-import { wrap } from './wrap';
+import { wrap, wrapAsync } from './wrap';
 
 const app = express();
 app.use(session({ secret: 'foo' }));
