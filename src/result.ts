@@ -1,6 +1,7 @@
 import * as HttpStatusCodes from 'http-status-codes';
 
 import { concatMap } from './helpers/map';
+import { HeaderNames } from './types';
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L32
 export class ResponseHeader {
@@ -76,10 +77,6 @@ export class Status extends Result {
         return new Result(this.header, writeable.toEntity(content));
     }
 }
-
-const HeaderNames = {
-    Location: 'Location',
-};
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L664
 export const Redirect = (url: string, statusCode: number) =>
