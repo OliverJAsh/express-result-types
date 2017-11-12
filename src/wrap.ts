@@ -2,6 +2,8 @@ import * as express from 'express';
 
 import * as MapHelpers from './helpers/map';
 import { Result } from './result';
+import { HeaderNames } from './types';
+
 
 export const applyResultToExpress = ({
     req,
@@ -27,7 +29,7 @@ export const applyResultToExpress = ({
         .set(headersStringDictionary)
         .set(
             result.body.contentType !== undefined
-                ? { 'Content-Type': result.body.contentType }
+                ? { [HeaderNames.ContentType]: result.body.contentType }
                 : {},
         )
         .send(result.body.data);
