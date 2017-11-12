@@ -59,7 +59,7 @@ export class Writeable<A> {
 }
 
 export class JsValue {
-    constructor(public value: any) {}
+    constructor(public value: {}) {}
 }
 // https://github.com/playframework/playframework/blob/8fc8bbae7fcd2dc63b19667191ce3735c7181d96/framework/src/play/src/main/scala/play/api/http/Writeable.scala#L106
 export const jsValueWriteable: Writeable<JsValue> = new Writeable(
