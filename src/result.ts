@@ -1,7 +1,7 @@
 import * as HttpStatusCodes from 'http-status-codes';
 
 import { concatMap } from './helpers/map';
-import { Header } from './types';
+import { Header, ContentType } from './types';
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L32
 export class ResponseHeader {
@@ -64,7 +64,7 @@ export class JsValue {
 // https://github.com/playframework/playframework/blob/8fc8bbae7fcd2dc63b19667191ce3735c7181d96/framework/src/play/src/main/scala/play/api/http/Writeable.scala#L106
 export const jsValueWriteable: Writeable<JsValue> = new Writeable(
     jsValue => JSON.stringify(jsValue.value),
-    'application/json',
+    ContentType.ApplicationJson,
 );
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L389
