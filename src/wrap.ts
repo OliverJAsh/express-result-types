@@ -4,6 +4,7 @@ import * as MapHelpers from './helpers/map';
 import { Result } from './result';
 import { HeaderNames } from './types';
 
+export type ExpressRequestSession = { data: { [key: string]: string } };
 
 export const applyResultToExpress = ({
     req,
@@ -20,9 +21,10 @@ export const applyResultToExpress = ({
             ? MapHelpers.toStringDictionary(result.newSession)
             : undefined;
 
+    const requestSession = req.session as Express.Session & ExpressRequestSession;
     if (maybeSessionStringDictionary !== undefined) {
         const sessionStringDictionary = maybeSessionStringDictionary;
-        req.session.data = sessionStringDictionary;
+        requestSession.data = sessionStringDictionary;
     }
     res
         .status(result.header.status)
