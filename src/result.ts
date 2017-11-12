@@ -1,7 +1,7 @@
 import * as HttpStatusCodes from 'http-status-codes';
 
 import { concatMap } from './helpers/map';
-import { HeaderNames } from './types';
+import { Header } from './types';
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L32
 export class ResponseHeader {
@@ -80,7 +80,7 @@ export class Status extends Result {
 
 // https://github.com/playframework/playframework/blob/49e1bbccdf19501f1c94732ecbef5f4f3ba0ce24/framework/src/play/src/main/scala/play/api/mvc/Results.scala#L664
 export const Redirect = (url: string, statusCode: number) =>
-    new Status(statusCode).withHeaders(new Map([[HeaderNames.Location, url]]));
+    new Status(statusCode).withHeaders(new Map([[Header.Location, url]]));
 
 export const TemporaryRedirect = (url: string): Result =>
     Redirect(url, HttpStatusCodes.TEMPORARY_REDIRECT);

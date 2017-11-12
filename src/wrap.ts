@@ -2,7 +2,7 @@ import * as express from 'express';
 
 import * as MapHelpers from './helpers/map';
 import { Result } from './result';
-import { HeaderNames } from './types';
+import { Header } from './types';
 
 export type ExpressRequestSession = { data: { [key: string]: string } };
 
@@ -31,7 +31,7 @@ export const applyResultToExpress = ({
         .set(headersStringDictionary)
         .set(
             result.body.contentType !== undefined
-                ? { [HeaderNames.ContentType]: result.body.contentType }
+                ? { [Header.ContentType]: result.body.contentType }
                 : {},
         )
         .send(result.body.data);

@@ -1,4 +1,4 @@
-export enum HeaderNames {
+export enum Header {
     Location = 'Location',
     ContentType = 'Content-Type',
 }
